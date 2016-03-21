@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
     @Bind(R.id.locationEditText) EditText mLocationEditText;
@@ -23,15 +27,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); //tells android which layout to use (R is resources)
         ButterKnife.bind(this);
 
-        mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String location = mLocationEditText.getText().toString();
+        mFindRestaurantsButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mFindRestaurantsButton) {
+            // Pattern matcher regex to confirm zip code entry
+            String location = mLocationEditText.getText().toString();
+            String zipRegex = "^[0-9]{5}(?:-[0-9]{4})?$";
+            Pattern pattern = Pattern.compile(zipRegex);
+            Matcher matcher = pattern.matcher(location);
+            if ( !matcher.matches() ) {
+                mLocationEditText.setError( "A five-digit zip code is required!" );
+            } else {
                 Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }
-
-        });
+        }
     }
+
 }

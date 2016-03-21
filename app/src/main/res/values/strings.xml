@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyRestaurants</string>
+
+    <!--API Keys-->
+    <string name="consumer_key">mAX3OAXHNlF58px32iLdjw</string>
+    <string name="consumer_secret">OvpTREBdizhiltrWSxCSOyNCkNY</string>
+    <string name="token">IuihiRRIR4We7Xpte2uIFgjBHsg4Mzrr</string>
+    <string name="token_secret">Ka9lUCAvRdiEoaCa3Ai8eEi8178</string>
 </resources>
