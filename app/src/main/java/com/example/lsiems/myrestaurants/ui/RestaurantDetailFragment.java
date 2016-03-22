@@ -31,7 +31,7 @@ public class RestaurantDetailFragment extends Fragment {
     private Restaurant mRestaurant;
 
 
-    public RestaurantDetailFragment newInstance(Restaurant restaurant) {
+    public static RestaurantDetailFragment newInstance(Restaurant restaurant) {
         RestaurantDetailFragment restaurantDetailFragment = new RestaurantDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("restaurant", Parcels.wrap(restaurant));
