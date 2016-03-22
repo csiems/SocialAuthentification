@@ -1,15 +1,14 @@
-package com.example.lsiems.myrestaurants;
+package com.example.lsiems.myrestaurants.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.text.DecimalFormat;
+import com.example.lsiems.myrestaurants.R;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if ( !matcher.matches() ) {
                 mLocationEditText.setError( "A five-digit zip code is required!" );
             } else {
-                Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+                Intent intent = new Intent(MainActivity.this, RestaurantsListActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }

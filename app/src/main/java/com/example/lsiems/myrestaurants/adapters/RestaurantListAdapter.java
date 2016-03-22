@@ -1,4 +1,4 @@
-package com.example.lsiems.myrestaurants;
+package com.example.lsiems.myrestaurants.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lsiems.myrestaurants.R;
+import com.example.lsiems.myrestaurants.models.Restaurant;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

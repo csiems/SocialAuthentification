@@ -1,7 +1,9 @@
-package com.example.lsiems.myrestaurants;
+package com.example.lsiems.myrestaurants.services;
 
 import android.content.Context;
-import android.os.Handler;
+
+import com.example.lsiems.myrestaurants.R;
+import com.example.lsiems.myrestaurants.models.Restaurant;
 
 import org.json.JSONArray;
 import org.json.JSONException;

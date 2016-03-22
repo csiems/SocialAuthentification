@@ -1,4 +1,4 @@
-package com.example.lsiems.myrestaurants;
+package com.example.lsiems.myrestaurants.models;
 
 import java.util.ArrayList;
 
