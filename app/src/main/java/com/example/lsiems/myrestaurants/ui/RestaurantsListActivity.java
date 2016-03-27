@@ -1,10 +1,13 @@
 package com.example.lsiems.myrestaurants.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.lsiems.myrestaurants.R;
 import com.example.lsiems.myrestaurants.adapters.RestaurantListAdapter;
@@ -24,8 +27,10 @@ public class RestaurantsListActivity extends AppCompatActivity {
     public static final String TAG = RestaurantsListActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private RestaurantListAdapter mAdapter;
-
     public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +38,13 @@ public class RestaurantsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        mSharedPreferences = this.getSharedPreferences(getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
+        mRecentAddress = mSharedPreferences.getString("location", null);
 
-        getRestaurants(location);
+        if (mRecentAddress != null) {
+            getRestaurants(mRecentAddress);
+        }
     }
 
     private void getRestaurants(String location) {
