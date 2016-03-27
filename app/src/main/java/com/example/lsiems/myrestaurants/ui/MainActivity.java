@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.lsiems.myrestaurants.MyRestaurantsApplication;
 import com.example.lsiems.myrestaurants.R;
 
 import java.util.regex.Matcher;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences.Editor mEditor;
     @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
     @Bind(R.id.locationEditText) EditText mLocationEditText;
+    @Bind(R.id.loginButton) Button mLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mEditor = mSharedPreferences.edit();
 
         mFindRestaurantsButton.setOnClickListener(this);
+        mLoginButton.setOnClickListener(this);
 
     }
 
@@ -56,7 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         }
+        if (v == mLoginButton) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
+
 
     private void addToSharedPreferences(String location) {
         mEditor.putString("location", location)

@@ -2,6 +2,7 @@ package com.example.lsiems.myrestaurants.services;
 
 import android.content.Context;
 
+import com.example.lsiems.myrestaurants.MyRestaurantsApplication;
 import com.example.lsiems.myrestaurants.R;
 import com.example.lsiems.myrestaurants.models.Restaurant;
 
