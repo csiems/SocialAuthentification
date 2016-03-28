@@ -65,6 +65,10 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mRatingLabel.setText(Double.toString(mRestaurant.getRating()) + "/5");
         mPhoneLabel.setText(mRestaurant.getPhone());
         mAddressLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getAddress()));
+
+        mWebsiteLabel.setOnClickListener(this);
+        mPhoneLabel.setOnClickListener(this);
+        mAddressLabel.setOnClickListener(this);
         return view;
     }
 
@@ -77,7 +81,7 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         }
         if (v == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
-                    Uri.parse(mRestaurant.getPhone()));
+                    Uri.parse("tel:" + mRestaurant.getPhone()));
             startActivity(phoneIntent);
         }
         if (v == mAddressLabel) {
