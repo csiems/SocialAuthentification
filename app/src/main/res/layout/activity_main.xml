@@ -50,13 +50,4 @@
         android:hint="Enter Zip Code"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/loginButton"
-        android:layout_above="@+id/locationEditText"
-        android:layout_centerHorizontal="true" />
-
-
 </RelativeLayout>

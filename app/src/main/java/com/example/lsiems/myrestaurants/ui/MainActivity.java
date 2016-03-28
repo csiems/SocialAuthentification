@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.lsiems.myrestaurants.MyRestaurantsApplication;
 import com.example.lsiems.myrestaurants.R;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
+    private Firebase mFirebaseRef;
     @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
     @Bind(R.id.locationEditText) EditText mLocationEditText;
-    @Bind(R.id.loginButton) Button mLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mEditor = mSharedPreferences.edit();
 
         mFindRestaurantsButton.setOnClickListener(this);
-        mLoginButton.setOnClickListener(this);
+        mFirebaseRef = MyRestaurantsApplication.getAppInstance().getFirebaseRef();
+        checkForAuthenticatedUser();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                this.logout();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        mFirebaseRef.unauth();
+        goToLoginActivity();
+    }
+
+    private void checkForAuthenticatedUser() {
+        AuthData authData = mFirebaseRef.getAuth();
+        if (authData == null) {
+            goToLoginActivity();
+        }
+    }
+
+    private void goToLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -58,10 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, RestaurantsListActivity.class);
                 startActivity(intent);
             }
-        }
-        if (v == mLoginButton) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
         }
     }
 
